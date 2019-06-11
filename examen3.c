@@ -74,14 +74,19 @@ void main()
       }
       if(caracter[i]=='A')
       {
-         printf("%lu"contadorms);
+         printf("\f %lu"contadorms);
          inicio=0;
       }
       i=0;
    }
       
       //if(inicio==0 && contadorms!=0)
-         
+   if(contadorms*100%100==0)
+   {
+      output_d(0x1);
+   }
+   else
+      output_d(0x0);
       
       if(i==20)
          i=0;

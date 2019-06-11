@@ -20,11 +20,15 @@ int bandera1=0;
 int calculo=0;
 int i=0;
 int inicio=0;
-int contadorms=0;
+int16 contadorms=0;
 
 #INT_TIMER0
-void TIMER0(){
-   contadorms++;
+void TIMER0(){ 
+if(inicio==1)
+{
+contadorms++;
+}
+      
    set_timer0(15536);
 }
 
@@ -48,34 +52,39 @@ void main()
         
         if(caracter[i]=='R' || caracter[i]=='S' || caracter[i]=='A'){
             printf("%c",caracter[i]);
-            if(caracter[i]=='='){
             calculo=1;
-        }
+        bandera1=1;
         i++;
-        bandera1=0;
     }
+    else 
+      bandera1=0;
    }
    
-   if(flag=1)
+   if(bandera1==1)
    {
-      i--;
-      if(i=='S')
+    i--;
+      if(caracter[i]=='S')
       {
          inicio=1;
       }
-      if(i=='R')
+      if(caracter[i]=='R')
       {
          contadorms=0;
+         
       }
-      if(i=='A')
+      if(caracter[i]=='A')
       {
+         printf("%lu"contadorms);
          inicio=0;
-         printf("%s"contadorms*100);
       }
-      
+      i=0;
    }
-  
       
+      //if(inicio==0 && contadorms!=0)
+         
+      
+      if(i==20)
+         i=0;
    }
 
 }

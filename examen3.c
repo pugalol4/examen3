@@ -13,17 +13,33 @@
 #use delay(crystal=40MHz)
 #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8,stream=PORT1)
 
-char caracter[22];//{-2+-2:}
+
+char caracter[22];
 int flag=0;
 int bandera1=0;
 int calculo=0;
 int i=0;
+int inicio=0;
+int contadorms=0;
+
+#INT_TIMER0
+void TIMER0(){
+   contadorms++;
+   set_timer0(15536);
+}
 
 
 void main()
 {
+   setup_oscillator(OSC_16MHZ);
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_8  );
+   enable_interrupts(INT_TIMER0 );
+   enable_interrupts(GLOBAL);
+   
+   
    printf("BIENVENIDO /r/n");
    
+   set_timer0(15536);
    while(TRUE)
    {
    if(kbhit()){
@@ -38,6 +54,25 @@ void main()
         i++;
         bandera1=0;
     }
+   }
+   
+   if(flag=1)
+   {
+      i--;
+      if(i=='S')
+      {
+         inicio=1;
+      }
+      if(i=='R')
+      {
+         contadorms=0;
+      }
+      if(i=='A')
+      {
+         inicio=0;
+         printf("%s"contadorms*100);
+      }
+      
    }
   
       
